@@ -12,7 +12,7 @@ App has simple UI and east to use (just add new task and check them when they co
 It is basically made from scratch using flutter and it use Hive to store your tasks locally in your phone
 
 <div style="display:flex; flex-wrap: wrap;">
-    <img src="https://github.com/Jaat0050/ToDo-App/assets/128021626/674696fd-57c0-4df1-8353-c755cfdcaa94" alt="Screenshot 1" style="width:200px; margin:5px;">
+    <img src="https://github.com/Jaat0050/ToDo-App/assets/128021626/674696fd-57c0-4df1-8353-c755cfdcaa94" alt="Screenshot 1" style="width:200px; margin:5px; margin-bottom:20px;">
     <img src="https://github.com/Jaat0050/ToDo-App/assets/128021626/01f8672f-6c57-41fb-95a1-c2388d7e9cf6" alt="Screenshot 2" style="width:200px; margin:5px;">
     <img src="https://github.com/Jaat0050/ToDo-App/assets/128021626/fd042d71-cc18-42d3-8a29-b486f064bd87" alt="Screenshot 3" style="width:200px; margin:5px;">
     <img src="https://github.com/Jaat0050/ToDo-App/assets/128021626/8b4fcbba-b559-4bf1-8e82-7427cf228c27" alt="Screenshot 4" style="width:200px; margin:5px;">
