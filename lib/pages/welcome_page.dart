@@ -1,45 +1,123 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:todo_app/data/constant.dart';
 import 'package:todo_app/pages/home_page.dart';
+import 'package:todo_app/pages/registeration.dart';
+import 'package:todo_app/data/sharedpref_helper.dart';
 
-class WelcomePage extends StatelessWidget {
-  const WelcomePage({super.key});
+class OnBoardingScreen extends StatefulWidget {
+  const OnBoardingScreen({super.key});
+
+  @override
+  OnBoardingScreenState createState() => OnBoardingScreenState();
+}
+
+class OnBoardingScreenState extends State<OnBoardingScreen> {
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      SharedPreferencesHelper.setisFirstTime(isFirstTime: false);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-          title: const Center(
-            child: Text(
-              "ToDo App",
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.italic),
-            ),
-          ),
-          backgroundColor: Colors.orange),
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("images/A3.png"),
-               fit: BoxFit.fill,
-               colorFilter: ColorFilter.mode(Colors.orange, BlendMode.color)
-               ),
-        ),
-        child: TextButton(
-          style: TextButton.styleFrom(
-              fixedSize: const Size(double.infinity, double.infinity),
-              foregroundColor: Colors.orange,
+          height: height,
+          width: width,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: height * 0.06),
+
+              //----------------------------------------------image----------------------------------//
+
+              const Spacer(),
+              Image(
+                image: AssetImage(
+                  board[0].image,
+                ),
+                fit: BoxFit.contain,
+                height: MediaQuery.of(context).size.height * 0.3,
               ),
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const HomePage()));
-          },
-          child: const Text("Tap to open",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 28,fontStyle: FontStyle.italic),),
-        ),
-      ),
+              const Spacer(),
+
+              //----------------------------------------------text 1----------------------------------//
+              Container(
+                height: 60,
+                width: width,
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Text(
+                    "WELCOME",
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 5,
+                    style: GoogleFonts.inter(textStyle: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w700, color: Colors.black)),
+                  ),
+                ),
+              ),
+
+              SizedBox(height: height * 0.02),
+
+              //----------------------------------------------button----------------------------------//
+              Padding(
+                padding: const EdgeInsets.only(left: 60, right: 60),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: appMainColor,
+                    disabledBackgroundColor: appMainColor,
+                    minimumSize: const Size(double.infinity, 35),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  onPressed: () async {
+                    Navigator.of(context).pushAndRemoveUntil(
+                        PageRouteBuilder(
+                            pageBuilder: (context, animation, secondaryAnimation) {
+                              return RegisterationScreen();
+                            },
+                            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                              return FadeTransition(opacity: animation, child: child);
+                            },
+                            transitionDuration: const Duration(milliseconds: 500)),
+                        (route) => false);
+                  },
+                  child: Text(
+                    'Next',
+                    style: GoogleFonts.nunito(
+                      textStyle: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              SizedBox(height: height * 0.06),
+            ],
+          )),
     );
   }
 }
+
+class UnbordingContent {
+  String image;
+
+  UnbordingContent({required this.image});
+}
+
+List<UnbordingContent> board = [UnbordingContent(image: toDoListGIF)];

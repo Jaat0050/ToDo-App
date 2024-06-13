@@ -12,7 +12,7 @@ class ToDodatabase{
   //1. first time opening the app
   void createInitialdata(){
     todolist = [
-      ["hello",false],
+      ["Welcome", false],
     ];
   }
 
